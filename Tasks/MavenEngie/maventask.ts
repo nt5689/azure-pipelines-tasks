@@ -302,7 +302,7 @@ function applySonarQubeArgs(mvnsq: ToolRunner | any, execFileJacoco?: string): T
     }
 
     // Apply argument for the JaCoCo tool, if enabled
-    if (typeof execFileJacoco != "undefined" && execFileJacoco) {
+    if (typeof execFileJacoco != "undefined" && execFileJacoco && !isJacocoCoverageReportXML) {
         mvnsq.arg('-Dsonar.jacoco.reportPaths=' + execFileJacoco);
     }
 
