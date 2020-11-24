@@ -33,7 +33,7 @@ subprojects {
     }
     test {
         jacoco {
-            destinationFile = file("${reportDir}/jacoco.exec")
+            destinationFile = file("${reportDir}/jacoco.xml")
         }
     }
 }
@@ -96,7 +96,7 @@ jacocoTestReport {
 test {
     finalizedBy jacocoTestReport
     jacoco {
-        destinationFile = file("${reportDir}/jacoco.exec")
+        destinationFile = file("${reportDir}/jacoco.xml")
     }
 }`;
 }
@@ -189,11 +189,11 @@ export function jacocoMavenPluginEnable(includeFilter: string[], excludeFilter: 
     let plugin = {
         "groupId": "org.jacoco",
         "artifactId": "jacoco-maven-plugin",
-        "version": "0.8.4",
+        "version": "0.8.6",
         "configuration": {
-            "destFile": path.join(outputDirectory, "jacoco.exec"),
+            "destFile": path.join(outputDirectory, "jacoco.xml"),
             "outputDirectory": outputDirectory,
-            "dataFile": path.join(outputDirectory, "jacoco.exec"),
+            "dataFile": path.join(outputDirectory, "jacoco.xml"),
             "includes": [{
                 "include": includeFilter,
             }],
@@ -272,7 +272,7 @@ export function jacocoMavenMultiModuleReport(reportDir: string, srcData: string,
                 </taskdef>
                 <report>
                   <executiondata>
-                    <file file="${path.join(reportDir, "jacoco.exec")}" />
+                    <file file="${path.join(reportDir, "jacoco.xml")}" />
                   </executiondata>
                   <structure name="Jacoco report">
                     <classfiles>
@@ -374,7 +374,7 @@ export function jacocoAntReport(reportDir: string, classData: string, sourceData
     <target name="CodeCoverage_9064e1d0">
         <jacoco:report xmlns:jacoco="antlib:org.jacoco.ant">
             <executiondata>
-                <file file="${path.join(reportDir, "jacoco.exec")}"/>
+                <file file="${path.join(reportDir, "jacoco.xml")}"/>
             </executiondata>
             <structure name="Jacoco report">
                 <classfiles>${classData}</classfiles>
@@ -390,7 +390,7 @@ export function jacocoAntReport(reportDir: string, classData: string, sourceData
 }
 
 export function jacocoAntCoverageEnable(reportDir: string): any {
-    let file = path.join(reportDir,"jacoco.exec");
+    let file = path.join(reportDir,"jacoco.xml");
     return {
         $:
         {
