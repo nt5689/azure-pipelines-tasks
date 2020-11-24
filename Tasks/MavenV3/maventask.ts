@@ -302,7 +302,7 @@ function applySonarQubeArgs(mvnsq: ToolRunner | any, execFileJacoco?: string): T
     }
 
     // Apply argument for the JaCoCo tool, if enabled
-    if (typeof execFileJacoco != "undefined" && execFileJacoco) {
+    if (typeof execFileJacoco != "undefined" && execFileJacoco && !isJacocoCoverageReportXML) {
         mvnsq.arg('-Dsonar.jacoco.reportPaths=' + execFileJacoco);
     }
 
@@ -399,7 +399,7 @@ function enableCodeCoverage() : Q.Promise<any> {
     summaryFile = path.join(reportDirectory, summaryFileName);
 
     if (ccTool.toLowerCase() == "jacoco") {
-        execFileJacoco = path.join(reportDirectory, "jacoco.exec");
+        execFileJacoco = path.join(reportDirectory, "jacoco.xml");
     }
 
     // clean any previously generated files.
